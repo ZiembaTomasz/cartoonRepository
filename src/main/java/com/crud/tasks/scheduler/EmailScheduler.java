@@ -28,8 +28,7 @@ public class EmailScheduler {
         message += size;
         if(size > 1){
             message += "tasks";
-        }
-        else{
+        } else {
             message += "task";
         }
         System.out.println(message);
