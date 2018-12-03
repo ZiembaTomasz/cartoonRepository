@@ -8,7 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static com.sun.javaws.JnlpxArgs.verify;
+
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
@@ -36,13 +36,6 @@ public class DbServiceTest {
         dbService.saveTask(task);
         assertEquals(task.getContent(), "Jon");
     }
-    @Test
-    public void deleteId() {
-        Long id = 2L;
 
-        dbService.deleteId(id);
-
-        verify();
-    }
 
 }

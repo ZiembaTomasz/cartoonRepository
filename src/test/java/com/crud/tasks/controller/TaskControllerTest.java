@@ -4,79 +4,52 @@ import com.crud.tasks.domain.Task;
 import com.crud.tasks.domain.TaskDto;
 import com.crud.tasks.mapper.TaskMapper;
 import com.crud.tasks.service.DbService;
+import com.google.gson.Gson;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.verify;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.mockito.Mockito.when;
+import static org.hamcrest.Matchers.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringRunner.class)
+@WebMvcTest(TaskController.class)
 public class TaskControllerTest {
-    @InjectMocks
-    TaskController taskController;
-    @Mock
-    DbService dbService;
-    @Mock
-    TaskMapper taskMapper;
-
-
+    @Autowired
+    private MockMvc mockMvc;
+    @MockBean
+    private DbService dbService;
+    @MockBean
+    private TaskMapper taskMapper;
     @Test
-    public void testGetTask() throws TaskNotFoundException{
+    public void shouldEmptyTask() throws Exception{
+        //Given
+        List<TaskDto>taskDtos = new ArrayList<>();
+        when(taskMapper.mapToTaskDtoList(dbService.getAllTasks())).thenReturn(taskDtos);
+        //When & Then
+        mockMvc.perform(get("/v1/task/getTasks").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().is(200))
+                .andExpect(jsonPath("$", hasSize(0)));
+    }
+    @Test
+    public void shouldDelete() throws Exception{
         //Given
         Long taskId = 5L;
-        Task task = new Task(10L, "Jesus", "33");
-        TaskDto taskDto = new TaskDto();
-        Optional<Task>taskOptional = Optional.of(task);
-        when(dbService.getTask(taskId)).thenReturn(taskOptional);
-        when(taskMapper.mapToTaskDto(task)).thenReturn(taskDto);
-        //When
-        TaskDto result = taskController.getTask(taskId);
-        assertEquals(taskDto, result);
+        dbService.deleteId(taskId);
+        //When & Then
+        mockMvc.perform(delete("/v1/task/deleteTask").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().is(400));
     }
-    @Test
-    public void testDeleteTask(){
-        //Given
-        Long taskId = 5L;
 
-        //When
-        taskController.deleteTask(taskId);
-
-        //Then
-        verify(dbService).deleteId(taskId);
-    }
-    @Test
-    public void testGetTasks(){
-        List<TaskDto>taskDtos = new ArrayList<>();
-
-        taskDtos = taskController.getTasks();
-
-        assertEquals(0, taskDtos.size());
-    }
-    @Test
-    public void updateTest(){
-        TaskDto taskDto = new TaskDto(2L, "Fok", "Teat");
-        Task task = new Task(2L, "Snow", "Gorg");
-        when(taskMapper.mapToTaskDto(dbService.saveTask(taskMapper.mapToTask(taskDto)))).thenReturn(taskDto);
-        TaskDto result1 = taskController.updateTask(taskDto);
-        assertEquals(taskDto, result1);
-    }
-    @Test
-    public void createTest(){
-        List<TaskDto>taskDtos = new ArrayList<>();
-        TaskDto taskDto = new TaskDto(2L, "Fok", "Teat");
-        taskDtos.add(taskDto);
-        Task task = new Task(2L, "Snow", "Gorg");
-        when(dbService.saveTask(taskMapper.mapToTask(taskDto))).thenReturn(task);
-        taskController.createTask(taskDto);
-        assertEquals(1, taskDtos.size());
-    }
 }
