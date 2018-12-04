@@ -35,6 +35,7 @@ dependencies {
 	compile 'org.springframework.boot:spring-boot-starter-mail:2.0.6.RELEASE'
 	compile('org.postgresql:postgresql')
 	compile('com.google.code.gson:gson:2.8.2')
+	compile('org.springframework.boot:spring-boot-starter-actuator')
 
 
 	//providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
