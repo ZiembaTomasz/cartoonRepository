@@ -9,7 +9,7 @@ public class Main {
 
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Whats your name? Ile zagrasz rund?");
+        System.out.println("Jak sie nazywaszTo? Ile zagrasz rund?");
         String name = sc.next();
         int ilosc = sc.nextInt();
         Boolean end = false;
