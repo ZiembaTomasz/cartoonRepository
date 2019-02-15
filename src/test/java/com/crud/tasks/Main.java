@@ -9,7 +9,7 @@ public class Main {
 
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Jak sie nazywaszTo? Ile zagrasz rund?");
+        System.out.println("Jak sie nazywasz? Ile zagrasz rund?");
         String name = sc.next();
         int ilosc = sc.nextInt();
         Boolean end = false;
@@ -48,6 +48,9 @@ public class Main {
             else if(ruchGracza == 3 && ruchKomputera == 1){
                 computerWin++;
                 System.out.println("Komputer pokonal gracza kamieniem i wygral!!");
+            }
+            else if(ruchGracza > 3){
+                System.out.println("Stary użyj mózgu :)");
             }
             else{
                 System.out.println("Remis");
