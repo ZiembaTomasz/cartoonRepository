@@ -1,7 +1,5 @@
 package com.crud.tasks.calc;
 
-import java.sql.SQLOutput;
-
 public class User {
     private String name;
     private String surname;

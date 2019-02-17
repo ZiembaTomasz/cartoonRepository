@@ -1,6 +1,5 @@
 package com.crud.tasks.service;
 
-import com.crud.tasks.domain.CreatedTrelloCardDto;
 import com.crud.tasks.domain.TrelloBoardDto;
 import com.crud.tasks.domain.TrelloCardDto;
 import com.crud.tasks.domain.TrelloListDto;

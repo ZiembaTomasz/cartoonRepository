@@ -4,18 +4,13 @@ import com.crud.tasks.config.CoreConfiguration;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.format.FormatterRegistrar;
 import org.springframework.format.FormatterRegistry;
-import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.*;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.mockingDetails;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CoreConfigurationTest {

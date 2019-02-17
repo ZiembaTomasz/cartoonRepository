@@ -1,7 +1,5 @@
 package com.crud.tasks.calc;
 
-import java.time.LocalDateTime;
-
 abstract class Lista {
     abstract void calculate();
 

@@ -3,16 +3,13 @@ package com.crud.tasks.trello.client;
 
 import com.crud.tasks.domain.*;
 import com.crud.tasks.mapper.TrelloMapper;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 

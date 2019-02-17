@@ -1,7 +1,5 @@
 package com.crud.tasks;
 
-import org.junit.Test;
-
 import java.util.Random;
 import java.util.Scanner;
 
