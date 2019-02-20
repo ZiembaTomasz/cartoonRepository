@@ -1,34 +1,38 @@
 package pl.tomaszziemba.sudoku;
 
+import javax.xml.bind.Element;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class SudokuGame {
     public static void main(String[] args) {
+
+//        System.out.println("Hello World!");
+//        Random random = new Random();
+//        List<SudokuRow>rows = new ArrayList<>();
+//        SudokuBoards table = new SudokuBoards(rows);
+//        for(int i =0; i<9; i++){
+//
+//            List<SudokuElement>elements = new ArrayList<>();
+//            for (int j =0; j<9; j++){
+//                SudokuElement element = new SudokuElement(random.nextInt(9)+ 1);
+//                elements.add(element);
+//            }
+//            SudokuRow row = new SudokuRow(elements);
+//            rows.add(row);
+//
+//
+//        }
+        SudokuBoards table;
+        table = new SudokuGame().createTable();
+        printTable(table);
+
         boolean gameFinished = false;
         while(!gameFinished) {
             SudokuGame theGame = new SudokuGame();
             gameFinished = theGame.resolveSudoku();
         }
-        System.out.println("Hello World!");
-        Random random = new Random();
-        List<SudokuRow>rows = new ArrayList<>();
-        SudokuBoards table = new SudokuBoards(rows);
-        for(int i =0; i<9; i++){
-
-            List<SudokuElement>elements = new ArrayList<>();
-            for (int j =0; j<9; j++){
-                SudokuElement element = new SudokuElement(random.nextInt(9)+ 1);
-                elements.add(element);
-            }
-            SudokuRow row = new SudokuRow(elements);
-            rows.add(row);
-
-
-        }
-        table = new SudokuGame().createTable();
-        printTable(table);
     }
 
     private boolean resolveSudoku() {
@@ -58,6 +62,30 @@ public class SudokuGame {
         }
         System.out.println();
     }
+    private SudokuBoards sudokuAlgorithm(SudokuBoards sudokuBoards){
+
+        for(SudokuRow row: sudokuBoards.getRows()){
+            for (int i = 0; i < row.getElements().size(); i++) {
+                SudokuElement myElement = row.getElements().get(i);
+                if(myElement.isEmpty()){
+                    for(SudokuElement checkedElement : row.getElements()){
+                        if(checkedElement.getValue() != -1){
+                            checkedElement.getPossibleValues().remove(Integer.valueOf(checkedElement.getValue()));
+
+                        }
+
+
+                    }
+
+                }
+            }
+
+        }
+    }
+
+
+
+
     private SudokuBoards createTable(){
         List<SudokuElement>row1 = new ArrayList<>();
         row1.add(new SudokuElement(-1));

@@ -16,5 +16,12 @@ public class SudokuElement {
 
     public SudokuElement(int value) {
         this.value = value;
+        for(int i = 1; i<10; i++){
+            possibleValues.add(i);
+        }
+
+    }
+    public boolean isEmpty(){
+        return value == EMPTY;
     }
 }
