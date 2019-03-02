@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -16,5 +17,6 @@ public class CartoonDto {
     private String name;
     private int ageRestriction;
     private double rating;
+    private Date date;
     private List<SeasonDto> seasonDtos;
 }

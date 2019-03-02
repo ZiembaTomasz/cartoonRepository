@@ -9,7 +9,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Entity(name = "episods")
+@Entity
 public class Episod {
     @Id
     @GeneratedValue

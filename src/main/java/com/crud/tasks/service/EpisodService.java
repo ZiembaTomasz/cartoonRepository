@@ -30,4 +30,10 @@ public class EpisodService {
         Season season = seasonRepository.getOne(seasonId);
         return episodMapper.mapToEpisodDto(episodRepository.findBySeason(season));
     }
+    public void deleteEpisode(Long seasonId){
+        episodRepository.delete(seasonId);
+    }
+    public EpisodDto getEpisod(Long episodId){
+        return episodMapper.mapToEpisodDto(episodRepository.getOne(episodId));
+    }
 }

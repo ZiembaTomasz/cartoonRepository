@@ -7,6 +7,7 @@ import com.crud.tasks.repository.CartoonRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -22,7 +23,7 @@ public class CartoonService {
 
     public CartoonDto saveCartoon(final CartoonDto cartoonDto) {
         Cartoon cartoon = cartoonMapper.mapToCarton(cartoonDto);
-        cartoon = cartoonRepository.save(cartoon);
+        cartoonRepository.save(cartoon);
         return cartoonMapper.mapToCartoonDto(cartoon);
     }
 
@@ -36,6 +37,10 @@ public class CartoonService {
 
     public List<CartoonDto> findCartoonByName(String name) {
         List<Cartoon>cartoons = cartoonRepository.findByNameLike(name + "%");
+        return cartoonMapper.mapToCartoonDtoList(cartoons);
+    }
+    public List<CartoonDto>retrieveNewCartoons(Date date) {
+        List<Cartoon> cartoons = cartoonRepository.retrieveNewCartoons(date);
         return cartoonMapper.mapToCartoonDtoList(cartoons);
     }
 }

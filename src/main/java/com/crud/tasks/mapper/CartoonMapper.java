@@ -2,6 +2,7 @@ package com.crud.tasks.mapper;
 
 import com.crud.tasks.domain.Cartoon;
 import com.crud.tasks.domain.CartoonDto;
+import com.crud.tasks.repository.CartoonRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -12,15 +13,19 @@ import java.util.List;
 @Component
 public class CartoonMapper {
     SeasonMapper seasonMapper;
+    CartoonRepository cartoonRepository;
+
 
     public CartoonDto mapToCartoonDto(final Cartoon cartoon){
+         cartoon.getUserRatings();
 
         return new CartoonDto(
                 cartoon.getId(),
                 cartoon.getName(),
                 cartoon.getAgeRestriction(),
-                cartoon.getRating(),
-                seasonMapper.mapToSeasonDto(cartoon.getSeasonList()));
+                cartoon.ratingAverage(),
+                cartoon.getDate(),
+                seasonMapper.mapToSeasonDto(cartoon.getSeasons()));
 
     }
     public List<CartoonDto> mapToCartoonDtoList(final  List<Cartoon>cartoonList){
@@ -30,8 +35,9 @@ public class CartoonMapper {
             Cartoon cartoon = cartoonList.get(i);
             cartoonDtoList.add( new CartoonDto(cartoon.getId(),cartoon.getName(),
                     cartoon.getAgeRestriction(),
-                    cartoon.getRating(),
-                    seasonMapper.mapToSeasonDto(cartoon.getSeasonList())));
+                    cartoon.ratingAverage(),
+                    cartoon.getDate(),
+                    seasonMapper.mapToSeasonDto(cartoon.getSeasons())));
         }
         return cartoonDtoList;
     }
@@ -39,7 +45,8 @@ public class CartoonMapper {
         return new Cartoon(cartoonDto.getId(),
                 cartoonDto.getName(),
                 cartoonDto.getAgeRestriction(),
-                cartoonDto.getRating(),
-                seasonMapper.mapToSeason(cartoonDto.getSeasonDtos(), cartoonDto));
+                cartoonDto.getDate(),
+                seasonMapper.mapToSeason(cartoonDto.getSeasonDtos(), cartoonDto),
+                cartoonRepository.findOne(cartoonDto.getId()).getUserRatings());
     }
 }

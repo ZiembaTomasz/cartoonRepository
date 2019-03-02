@@ -6,21 +6,19 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
 @Entity
-
-public class Season {
+public class UserRating {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Long id;
     @Column
-    private Long cartoonId;
+    private int rating;
+    @ManyToOne
+    @JoinColumn(name ="userId")
+    private User user;
     @Column
-    private String name;
-//    @ManyToOne
-//    @JoinColumn(name="cartoonId")
-//    private Cartoon cartoon;
-
+    private Long cartoonId;
 }

@@ -5,22 +5,21 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
+import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity(name = "user")
 @Data
-@Entity
 
-public class Season {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column
-    private Long cartoonId;
+    private String firstname;
     @Column
-    private String name;
-//    @ManyToOne
-//    @JoinColumn(name="cartoonId")
-//    private Cartoon cartoon;
+    private String lastname;
+    @Column
+    private String email;
 
 }

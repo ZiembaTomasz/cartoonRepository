@@ -3,11 +3,20 @@ package com.crud.tasks.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
+@NamedNativeQuery(
+        name = "Cartoon.retrieveNewCartoons",
+        query = "SELECT * FROM CARTOONS" +
+                "WHERE DATE <:DATE",
+        resultClass = Cartoon.class
+)
+
+
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "cartoons")
+@Entity
 @Data
 
 
@@ -21,10 +30,23 @@ public class Cartoon {
     @Column
     private int ageRestriction;
     @Column
-    private double rating;
+    private Date date;
     @OneToMany(
             cascade = CascadeType.ALL
     )
     @JoinColumn(name = "cartoonId")
-    private List<Season>seasonList;
+    private List<Season> seasons;
+    @OneToMany(
+            cascade = CascadeType.ALL
+    )
+    @JoinColumn(name = "cartoonId")
+    private List<UserRating>userRatings;
+
+    public double ratingAverage(){
+          return userRatings.stream()
+                .map(t -> t.getRating())
+                .reduce(0,(sum, current) -> sum += current) * 1.0/userRatings.size();
+
+    }
+
 }
