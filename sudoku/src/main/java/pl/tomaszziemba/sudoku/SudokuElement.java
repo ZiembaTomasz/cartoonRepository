@@ -21,7 +21,21 @@ public class SudokuElement {
         }
 
     }
+
+    public void expectedValue() {
+        if(getPossibleValues().size() == 1 ){
+            int x = getPossibleValues().get(0);
+            value = x;
+        }
+    }
+
     public boolean isEmpty(){
         return value == EMPTY;
     }
+    public void removePossibleValue( SudokuElement checkedElement) {
+        if(checkedElement.getValue() != -1){
+            possibleValues.remove(Integer.valueOf(checkedElement.getValue()));
+        }
+    }
+
 }
