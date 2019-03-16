@@ -23,10 +23,14 @@ public class SudokuGame {
 //
 //        }
         SudokuBoards table;
+
         table = new SudokuGame().createTable();
-        printTable(table);
-        new SudokuGame().sudokuAlgorithm(table);
-        printTable(table);
+        SudokuGame sudokuGame = new SudokuGame();
+        sudokuGame.findIndex(table);
+        //table = new SudokuGame().createTable();
+        //printTable(table);
+        //new SudokuGame().sudokuAlgorithm(table);
+        //printTable(table);
 
 //        boolean gameFinished = false;
         //       while(!gameFinished) {
@@ -96,6 +100,21 @@ public class SudokuGame {
             }
             myElement.expectedValue();
         }
+    }
+    public void findIndex(SudokuBoards sudokuBoards){
+
+        for(int i = 0; i < sudokuBoards.getRows().size(); i++){
+            int elements = 8;
+            for(int j = 0; j <=elements;   j++){
+                System.out.println(sudokuBoards.getRows().get(i).getElements().get(j).getValue());
+                int a = i/3 * 3;
+                int b = j/3 * 3;
+
+                System.out.println(i + "," + j + "->" + (a + "." +b));
+
+            }
+        }
+
     }
 
 // jezeli mam tam isEmpty to jest empty wiec juz nie robie kolejnego ifa w tym
