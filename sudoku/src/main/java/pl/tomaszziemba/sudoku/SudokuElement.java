@@ -9,7 +9,7 @@ import java.util.List;
 @Getter
 
 public class SudokuElement {
-    public static final int EMPTY = -1;
+    public static final int EMPTY = 0;
 
     private int value;
     private List<Integer> possibleValues = new ArrayList<>();
