@@ -23,7 +23,7 @@ public class SudokuGameTest {
         row1.add(new SudokuElement(5));
         row1.add(new SudokuElement(4));
         row1.add(new SudokuElement(3));
-        row1.add(new SudokuElement(-1));
+        row1.add(new SudokuElement(0));
         row1.add(new SudokuElement(2));
         row1.add(new SudokuElement(1));
         List<SudokuRow>sudokuRows = new ArrayList<>();
@@ -50,13 +50,13 @@ public class SudokuGameTest {
     public void createTestTableOne2(){
         //Given
         List<SudokuElement> row1 = new ArrayList<>();
-        row1.add(new SudokuElement(-1));
+        row1.add(new SudokuElement(0));
         row1.add(new SudokuElement(8));
         row1.add(new SudokuElement(6));
         row1.add(new SudokuElement(5));
         row1.add(new SudokuElement(4));
         row1.add(new SudokuElement(3));
-        row1.add(new SudokuElement(-1));
+        row1.add(new SudokuElement(0));
         row1.add(new SudokuElement(2));
         row1.add(new SudokuElement(1));
         List<SudokuRow>sudokuRows = new ArrayList<>();
@@ -66,13 +66,13 @@ public class SudokuGameTest {
         //When
         sudokuGame.sudokuAlgorithm(sudokuBoards);
         //Then
-        assertEquals(-1,row1.get(0).getValue());
+        assertEquals(0,row1.get(0).getValue());
         assertEquals(8,row1.get(1).getValue());
         assertEquals(6,row1.get(2).getValue());
         assertEquals(5,row1.get(3).getValue());
         assertEquals(4,row1.get(4).getValue());
         assertEquals(3,row1.get(5).getValue());
-        assertEquals(-1,row1.get(6).getValue());
+        assertEquals(0,row1.get(6).getValue());
         assertEquals(2,row1.get(7).getValue());
         assertEquals(1,row1.get(8).getValue());
 
@@ -89,7 +89,7 @@ public class SudokuGameTest {
         sudokuRows.add(new SudokuRow(asList(new SudokuElement(5))));
         sudokuRows.add(new SudokuRow(asList(new SudokuElement(4))));
         sudokuRows.add(new SudokuRow(asList(new SudokuElement(3))));
-        sudokuRows.add(new SudokuRow(asList(new SudokuElement(-1))));
+        sudokuRows.add(new SudokuRow(asList(new SudokuElement(0))));
         sudokuRows.add(new SudokuRow(asList(new SudokuElement(2))));
         sudokuRows.add(new SudokuRow(asList(new SudokuElement(1))));
         SudokuBoards sudokuBoards = new SudokuBoards(sudokuRows);
