@@ -32,5 +32,5 @@ public class UserRatingMapper {
                 .map(t-> mapToUserRating(t, user))
                 .collect(Collectors.toList());
     }
-    //
+    ////
 }
