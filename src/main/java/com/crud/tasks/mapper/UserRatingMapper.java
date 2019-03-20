@@ -21,7 +21,7 @@ public class UserRatingMapper {
                 user.getId());
 
     }
-    public UserRating mapToUserRating(UserRatingDto userRatingDto, User user ){
+    public UserRating mapToUserRating(UserRatingDto userRatingDto, User user){
         return new UserRating(userRatingDto.getId(),
                 userRatingDto.getRating(),
                 user,
@@ -32,4 +32,5 @@ public class UserRatingMapper {
                 .map(t-> mapToUserRating(t, user))
                 .collect(Collectors.toList());
     }
+    //
 }
