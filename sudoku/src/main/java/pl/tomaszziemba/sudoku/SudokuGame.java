@@ -52,7 +52,6 @@ public class SudokuGame {
 
     }
 
-
     private static void printRow(SudokuRow sudokuRow) {
         int i = 0;
         for (SudokuElement sudokuElement : sudokuRow.getElements()) {
@@ -65,14 +64,14 @@ public class SudokuGame {
     }
 
     private boolean resolveSudoku(SudokuBoards sudokuBoards) {
-        List<Integer>noEmpty = new ArrayList<>();
+        List<Integer> noEmpty = new ArrayList<>();
 
-        for (int x = 0; x <sudokuBoards.getRows().size(); x++){
+        for (int x = 0; x < sudokuBoards.getRows().size(); x++) {
             for (int y = 0; y < sudokuBoards.getRows().size(); y++) {
                 SudokuElement checkedElement = sudokuBoards.getRows().get(x).getElements().get(y);
-                if(checkedElement.getValue() != 0){
+                if (checkedElement.getValue() != 0) {
                     noEmpty.add(checkedElement.getValue());
-                    if(noEmpty.size() == 81){
+                    if (noEmpty.size() == 81) {
                         return true;
                     }
                 }
@@ -83,29 +82,36 @@ public class SudokuGame {
     }
 
     public SudokuBoards sudokuAlgorithm(SudokuBoards sudokuBoards) {
-        int p = 0;
+        int counter = 0;
         while (!resolveSudoku(sudokuBoards)) {
 
-            if(p++>100){
+            if (counter++ > 100) {
                 break;
             }
             for (SudokuRow row : sudokuBoards.getRows()) {
-                for (int i = 0; i < row.getElements().size(); i++) {
-                    SudokuElement myElement = row.getElements().get(i);
-                    clearRow(row, myElement);
-                }
-                for (int i = 0; i < row.getElements().size(); i++) {
-                    SudokuElement myElement = row.getElements().get(i);
-                    clearColumn(sudokuBoards, i, myElement);
-                }
+                clearRow(row);
+                clearColumns(sudokuBoards, row);
             }
             clearSquare(sudokuBoards);
-
         }
         return sudokuBoards;
     }
 
-    public void clearColumn(SudokuBoards sudokuBoards, int i, SudokuElement myElement) {
+    public void clearRow(SudokuRow row) {
+        for (int i = 0; i < row.getElements().size(); i++) {
+            SudokuElement myElement = row.getElements().get(i);
+            clearElementsForRow(row, myElement);
+        }
+    }
+
+    public void clearColumns(SudokuBoards sudokuBoards, SudokuRow row) {
+        for (int i = 0; i < row.getElements().size(); i++) {
+            SudokuElement myElement = row.getElements().get(i);
+            clearElementsForColumn(sudokuBoards, i, myElement);
+        }
+    }
+
+    public void clearElementsForColumn(SudokuBoards sudokuBoards, int i, SudokuElement myElement) {
         if (myElement.isEmpty()) {
             for (SudokuRow row1 : sudokuBoards.getRows()) {
                 SudokuElement nextElement = row1.getElements().get(i);
@@ -116,33 +122,26 @@ public class SudokuGame {
         }
     }
 
-    public void clearRow(SudokuRow row, SudokuElement myElement) {
+    public void clearElementsForRow(SudokuRow row, SudokuElement myElement) {
         if (myElement.isEmpty()) {
-            for (SudokuElement checkedElement : row.getElements()) {
-                myElement.removePossibleValue(checkedElement);
-            }
+            removeElements(myElement, row.getElements());
             myElement.expectedValue();
         }
     }
-    public void clearSquare(SudokuBoards sudokuBoards){
 
-        for(int i = 0; i < sudokuBoards.getRows().size(); i++){
-            int elements = 8;
-            for(int j = 0; j <=elements;   j++){
-                //System.out.println(sudokuBoards.getRows().get(i).getElements().get(j).getValue());
-                int a = i/3 * 3;
-                int b = j/3 * 3;
-                SudokuElement checkedElement = sudokuBoards.getRows().get(i).getElements().get(j);
+    public void clearSquare(SudokuBoards sudokuBoards) {
 
-                //System.out.println(i + "," + j + "->" + (a + "." +b));
-                if(checkedElement.isEmpty()){
-                    for(int k = a; k<= a+2; k++ ){
-                        for(int l = b; l<= b+2; l++){
-                            SudokuElement elementToRemove = sudokuBoards.getRows().get(l).getElements().get(k);
-                            checkedElement.removePossibleValue(elementToRemove);
+        for (int i = 0; i < sudokuBoards.getRows().size(); i++) {
+            SudokuRow row = sudokuBoards.getRows().get(i);
 
-                        }
-                    }
+            for (int j = 0; j < row.getElements().size(); j++) {
+
+                int a = i / 3 * 3;
+                int b = j / 3 * 3;
+                SudokuElement checkedElement = row.getElements().get(j);
+                if (checkedElement.isEmpty()) {
+                    List<SudokuElement> squareElements = getElementsForSquare(sudokuBoards, a, b);
+                    removeElements(checkedElement, squareElements);
                 }
 
             }
@@ -150,6 +149,23 @@ public class SudokuGame {
 
     }
 
+    public List<SudokuElement> getElementsForSquare(SudokuBoards sudokuBoards, int a, int b) {
+        List<SudokuElement> squareElements = new ArrayList<>();
+        for (int n = a; n <= a + 2; n++) {
+            for (int m = b; m <= b + 2; m++) {
+                SudokuElement elementToRemove = sudokuBoards.getRows().get(n).getElements().get(m);
+                squareElements.add(elementToRemove);
+
+            }
+        }
+        return squareElements;
+    }
+
+    public void removeElements(SudokuElement checkedElement, List<SudokuElement> elementsToRemove) {
+        for (SudokuElement elementToRemove : elementsToRemove) {
+            checkedElement.removePossibleValue(elementToRemove);
+        }
+    }
 
 // jezeli mam tam isEmpty to jest empty wiec juz nie robie kolejnego ifa w tym
 

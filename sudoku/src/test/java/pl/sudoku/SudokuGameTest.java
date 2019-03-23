@@ -14,7 +14,7 @@ import static java.util.Arrays.asList;
 import static org.junit.Assert.*;
 public class SudokuGameTest {
     @Test
-    public void createTestTableOne1(){
+    public void testClearRow(){
         //Given
         List<SudokuElement> row1 = new ArrayList<>();
         row1.add(new SudokuElement(9));
@@ -60,11 +60,12 @@ public class SudokuGameTest {
         row1.add(new SudokuElement(2));
         row1.add(new SudokuElement(1));
         List<SudokuRow>sudokuRows = new ArrayList<>();
+        SudokuRow sudokuRow = new SudokuRow(row1);
         sudokuRows.add(new SudokuRow(row1));
         SudokuBoards sudokuBoards = new SudokuBoards(sudokuRows);
         SudokuGame sudokuGame = new SudokuGame();
         //When
-        sudokuGame.sudokuAlgorithm(sudokuBoards);
+        sudokuGame.clearRow(sudokuRow);
         //Then
         assertEquals(0,row1.get(0).getValue());
         assertEquals(8,row1.get(1).getValue());
