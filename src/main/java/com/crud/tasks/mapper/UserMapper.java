@@ -9,24 +9,30 @@ import java.util.stream.Collectors;
 @Component
 public class UserMapper {
     SeasonMapper seasonMapper;
+    UserRatingMapper userRatingMapper;
     public UserDto mapToUserDto(final User user){
         return new UserDto(user.getId(),
                 user.getFirstname(),
                 user.getLastname(),
-                user.getEmail(),
-                mapToUserRatingDto().
-                );
+                user.getEmail());
+
 
     }
 
-    public List<UserRatingDto> mapToUserRatingDto(final List<UserRating>userRatings){
+    public List<User> mapToUsers (final List<UserDto>userRatings){
         return userRatings.stream()
-                .map(this::mapToUserRatingDto)
+                .map(this::mapToUser)
                 .collect(Collectors.toList());
     }
-    public UserRatingDto mapToUserRatingDto(final UserRating userRating, final User user){
-        return new UserRatingDto( userRating.getId(),
-        user.getId());
-
+    public User mapToUser(final UserDto userDto){
+        return new User(userDto.getId(),
+                userDto.getFirstname(),
+                userDto.getLastname(),
+                userDto.getEmail());
+    }
+    public List<UserDto>mapToUserDto(final List<User>users){
+        return users.stream()
+                .map(this::mapToUserDto)
+                .collect(Collectors.toList());
     }
 }

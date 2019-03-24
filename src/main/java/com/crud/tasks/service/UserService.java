@@ -13,6 +13,6 @@ public class UserService {
     UserRepository userRepository;
 
     public List<UserDto>getAllUsers(){
-
+        return null;
     }
 }
