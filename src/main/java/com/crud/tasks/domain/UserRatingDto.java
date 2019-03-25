@@ -11,4 +11,5 @@ public class UserRatingDto {
     private Long id;
     private int rating;
     private Long userId;
+    private Long cartoonId;
 }

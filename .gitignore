@@ -18,6 +18,9 @@
 *.ipr
 /out/
 sudoku/out/
+sudoku/build/**
+sudoku/gradlew
+
 
 ### NetBeans ###
 /nbproject/private/
