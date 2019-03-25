@@ -3,6 +3,8 @@ package com.crud.tasks.mapper;
 import com.crud.tasks.domain.User;
 import com.crud.tasks.domain.UserRating;
 import com.crud.tasks.domain.UserRatingDto;
+import com.crud.tasks.repository.CartoonRepository;
+
 import com.crud.tasks.repository.UserRepository;
 import org.springframework.stereotype.Component;
 
@@ -11,6 +13,8 @@ import java.util.stream.Collectors;
 
 @Component
 public class UserRatingMapper {
+
+    CartoonRepository cartoonRepository;
     UserRepository userRepository;
 
 

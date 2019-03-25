@@ -15,4 +15,7 @@ public class UserService {
     public List<UserDto>getAllUsers(){
         return null;
     }
+    public void save(){
+
+    }
 }
