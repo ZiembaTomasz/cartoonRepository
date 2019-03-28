@@ -1,5 +1,6 @@
 package com.crud.tasks.controller;
 
+import com.crud.tasks.domain.UserRating;
 import com.crud.tasks.domain.UserRatingDto;
 import com.crud.tasks.service.UserRatingService;
 import lombok.AllArgsConstructor;
@@ -19,5 +20,10 @@ public class UserRatingController {
     @RequestMapping(method = RequestMethod.POST, value = "rating")
     public void addRating(@RequestBody UserRatingDto userRatingDto){
         userRatingService.addRating(userRatingDto);
+    }
+    @RequestMapping(method = RequestMethod.PUT, value = "rating")
+    public UserRatingDto updateUserRating(@RequestBody UserRatingDto userRatingDto){
+        return userRatingService.addRating(userRatingDto);
+
     }
 }
