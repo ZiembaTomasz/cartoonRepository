@@ -30,7 +30,7 @@ public class UserService {
         return userMapper.mapToUserDto(user);
     }
     public UserDto getUserByName(String name){
-        User user = userRepository.findByNameLike(name);
+        User user = userRepository.findByLastnameLike(name);
         return userMapper.mapToUserDto(user);
     }
 }

@@ -5,9 +5,12 @@ import com.crud.tasks.domain.UserRatingDto;
 import com.crud.tasks.mapper.UserRatingMapper;
 import com.crud.tasks.repository.UserRatingRepository;
 import com.crud.tasks.repository.UserRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
+@AllArgsConstructor
 public class UserRatingService {
     UserRatingRepository userRatingRepository;
     UserRatingMapper userRatingMapper;

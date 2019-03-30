@@ -1,7 +1,6 @@
 package com.crud.tasks.mapper;
 
-import com.crud.tasks.domain.Cartoon;
-import com.crud.tasks.domain.CartoonDto;
+import com.crud.tasks.domain.*;
 import com.crud.tasks.repository.CartoonRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -15,10 +14,7 @@ public class CartoonMapper {
     SeasonMapper seasonMapper;
     CartoonRepository cartoonRepository;
 
-
-    public CartoonDto mapToCartoonDto(final Cartoon cartoon){
-         cartoon.getUserRatings();
-
+    public CartoonDto mapToCartoonDto(final Cartoon cartoon) {
         return new CartoonDto(
                 cartoon.getId(),
                 cartoon.getName(),
@@ -28,12 +24,13 @@ public class CartoonMapper {
                 seasonMapper.mapToSeasonDto(cartoon.getSeasons()));
 
     }
-    public List<CartoonDto> mapToCartoonDtoList(final  List<Cartoon>cartoonList){
-        List<CartoonDto>cartoonDtoList = new ArrayList<>();
 
-        for (int i = 0; i<cartoonList.size(); i++){
+    public List<CartoonDto> mapToCartoonDtoList(final List<Cartoon> cartoonList) {
+        List<CartoonDto> cartoonDtoList = new ArrayList<>();
+
+        for (int i = 0; i < cartoonList.size(); i++) {
             Cartoon cartoon = cartoonList.get(i);
-            cartoonDtoList.add( new CartoonDto(cartoon.getId(),cartoon.getName(),
+            cartoonDtoList.add(new CartoonDto(cartoon.getId(), cartoon.getName(),
                     cartoon.getAgeRestriction(),
                     cartoon.ratingAverage(),
                     cartoon.getDate(),
@@ -41,12 +38,24 @@ public class CartoonMapper {
         }
         return cartoonDtoList;
     }
-    public Cartoon mapToCarton( final CartoonDto cartoonDto) {
+
+    public Cartoon mapToCarton(final CartoonDto cartoonDto) {
+        Cartoon cartoon = cartoonRepository.findOne(cartoonDto.getId());
+        List<UserRating> userRatings = new ArrayList<>();
+        List<Season>seasons = new ArrayList<>();
+        if(cartoonDto.getSeasonDtos() != null){
+            seasons = seasonMapper.mapToSeason(cartoonDto.getSeasonDtos(), cartoonDto);
+
+        }
+        if(cartoon != null){
+            userRatings = cartoonRepository.findOne(cartoonDto.getId()).getUserRatings();
+        }
         return new Cartoon(cartoonDto.getId(),
                 cartoonDto.getName(),
                 cartoonDto.getAgeRestriction(),
                 cartoonDto.getDate(),
-                seasonMapper.mapToSeason(cartoonDto.getSeasonDtos(), cartoonDto),
-                cartoonRepository.findOne(cartoonDto.getId()).getUserRatings());
+                seasons,
+                userRatings
+                );
     }
 }
