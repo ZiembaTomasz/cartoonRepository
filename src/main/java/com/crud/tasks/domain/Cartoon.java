@@ -3,11 +3,12 @@ package com.crud.tasks.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 @NamedNativeQuery(
         name = "Cartoon.retrieveNewCartoons",
-        query = "SELECT * FROM CARTOONS" +
+        query = "SELECT * FROM CARTOON" +
                 "WHERE DATE <:DATE",
         resultClass = Cartoon.class
 )
@@ -26,6 +27,7 @@ public class Cartoon {
     private Long id;
 
     @Column
+    @NotNull
     private String name;
     @Column
     private int ageRestriction;

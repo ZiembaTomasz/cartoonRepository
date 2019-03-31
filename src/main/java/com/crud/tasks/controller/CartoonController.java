@@ -1,6 +1,5 @@
 package com.crud.tasks.controller;
 
-import com.crud.tasks.domain.Cartoon;
 import com.crud.tasks.domain.CartoonDto;
 import com.crud.tasks.service.CartoonService;
 import lombok.AllArgsConstructor;
@@ -44,7 +43,7 @@ public class CartoonController {
     }
     @RequestMapping(method = RequestMethod.PUT, value = "updateCarton")
     public CartoonDto updateCartoon(@RequestBody CartoonDto cartoonDto){
-        return cartoonService.saveCartoon(cartoonDto);
+        return cartoonService.updateCartoon(cartoonDto);
     }
     @RequestMapping(method = RequestMethod.GET, value = "getCartoonsFromDate")
     public List<CartoonDto> retrieveNewCartoons(Date date){
