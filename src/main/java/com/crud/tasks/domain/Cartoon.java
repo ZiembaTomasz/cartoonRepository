@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
+
 @NamedNativeQuery(
         name = "Cartoon.retrieveNewCartoons",
         query = "SELECT * FROM CARTOON" +
@@ -13,13 +14,10 @@ import java.util.List;
         resultClass = Cartoon.class
 )
 
-
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Data
-
 
 public class Cartoon {
     @Id
@@ -42,13 +40,11 @@ public class Cartoon {
             cascade = CascadeType.ALL
     )
     @JoinColumn(name = "cartoonId")
-    private List<UserRating>userRatings;
+    private List<UserRating> userRatings;
 
-    public double ratingAverage(){
-          return userRatings.stream()
+    public double ratingAverage() {
+        return userRatings.stream()
                 .map(t -> t.getRating())
-                .reduce(0,(sum, current) -> sum += current) * 1.0/userRatings.size();
-
+                .reduce(0, (sum, current) -> sum += current) * 1.0 / userRatings.size();
     }
-
 }

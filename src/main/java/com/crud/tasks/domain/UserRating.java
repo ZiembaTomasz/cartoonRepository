@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,6 +16,7 @@ public class UserRating {
     @GeneratedValue
     private Long id;
     @Column
+    @NotNull
     private int rating;
     @ManyToOne
     @JoinColumn(name ="userId")

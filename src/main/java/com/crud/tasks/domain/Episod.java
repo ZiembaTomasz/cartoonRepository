@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,6 +16,7 @@ public class Episod {
     @GeneratedValue
     private Long id;
     @Column
+    @NotNull
     private String name;
     @ManyToOne
     @JoinColumn(name = "seasonID")

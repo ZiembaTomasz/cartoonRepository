@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,8 +17,10 @@ public class Season {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column
+    @NotNull
     private Long cartoonId;
     @Column
+    @NotNull
     private String name;
 //    @ManyToOne
 //    @JoinColumn(name="cartoonId")
