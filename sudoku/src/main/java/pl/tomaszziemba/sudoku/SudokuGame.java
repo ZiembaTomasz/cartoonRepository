@@ -6,37 +6,13 @@ import java.util.List;
 public class SudokuGame {
     public static void main(String[] args) {
 
-//        System.out.println("Hello World!");
-//        Random random = new Random();
-//        List<SudokuRow>rows = new ArrayList<>();
-//        SudokuBoards table = new SudokuBoards(rows);
-//        for(int i =0; i<9; i++){
-//
-//            List<SudokuElement>elements = new ArrayList<>();
-//            for (int j =0; j<9; j++){
-//                SudokuElement element = new SudokuElement(random.nextInt(9)+ 1);
-//                elements.add(element);
-//            }
-//            SudokuRow row = new SudokuRow(elements);
-//            rows.add(row);
-//
-//
-//        }
+
         SudokuBoards table;
 
         table = new SudokuGame().createTable();
         SudokuGame sudokuGame = new SudokuGame();
         sudokuGame.sudokuAlgorithm(table);
-        //table = new SudokuGame().createTable();
         printTable(table);
-        //new SudokuGame().sudokuAlgorithm(table);
-        //printTable(table);
-
-//        boolean gameFinished = false;
-        //       while(!gameFinished) {
-        //          SudokuGame theGame = new SudokuGame();
-        //         gameFinished = theGame.resolveSudoku();
-        //    }
     }
 
     private static void printTable(SudokuBoards table) {
@@ -75,7 +51,6 @@ public class SudokuGame {
                         return true;
                     }
                 }
-
             }
         }
         return false;
@@ -166,8 +141,6 @@ public class SudokuGame {
             checkedElement.removePossibleValue(elementToRemove);
         }
     }
-
-// jezeli mam tam isEmpty to jest empty wiec juz nie robie kolejnego ifa w tym
 
     private SudokuBoards createTable() {
         List<SudokuElement> row1 = new ArrayList<>();
