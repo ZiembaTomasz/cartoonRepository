@@ -27,10 +27,13 @@ public class Cartoon {
     @Column
     @NotNull
     private String name;
+
     @Column
     private int ageRestriction;
+
     @Column
     private Date date;
+
     @OneToMany(
             cascade = CascadeType.ALL
     )

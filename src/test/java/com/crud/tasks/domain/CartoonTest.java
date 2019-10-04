@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 public class CartoonTest {
 
     @Test
-    public void tescik(){
+    public void averageTest(){
         Cartoon cartoon = new Cartoon();
         List<UserRating> userRatings = new ArrayList<>();
         userRatings.add(new UserRating(2L, 10, null, 2L));
