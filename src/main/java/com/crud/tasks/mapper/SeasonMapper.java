@@ -17,11 +17,11 @@ public class SeasonMapper {
 
     }
     public Season mapToSeason(SeasonDto seasonDto, CartoonDto cartoonDto){
-        return new Season(seasonDto.getId(), cartoonDto.getId(), seasonDto.getName());
+        return new Season(seasonDto.getId(), cartoonDto.getId(), seasonDto.getName(), seasonDto.getNumberOfSeasons());
     }
 
     public SeasonDto mapToSeasonDto(Season season){
-        return new SeasonDto(season.getId(), season.getName());
+        return new SeasonDto(season.getId(), season.getName(), season.getNumberOfSeasons());
     }
     public List<Season> mapToSeason(List<SeasonDto>seasonDtoList, CartoonDto cartoonDto){
         return seasonDtoList.stream()

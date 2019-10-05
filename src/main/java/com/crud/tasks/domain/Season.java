@@ -22,8 +22,9 @@ public class Season {
     @Column
     @NotNull
     private String name;
-//    @ManyToOne
-//    @JoinColumn(name="cartoonId")
-//    private Cartoon cartoon;
+    @Column
+    @NotNull
+    private int numberOfSeasons;
+
 
 }

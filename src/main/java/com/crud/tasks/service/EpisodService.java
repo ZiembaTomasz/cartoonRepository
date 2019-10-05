@@ -19,7 +19,7 @@ public class EpisodService {
     private EpisodRepository episodRepository;
     private EpisodMapper episodMapper;
     private SeasonRepository seasonRepository;
-    private SeasonMapper seasonMapper;
+
 
     public EpisodDto saveEpisod(EpisodDto episodDto, Long seasondId){
         Episod episod = episodMapper.mapToEpisod(episodDto,seasonRepository.getOne(seasondId));
