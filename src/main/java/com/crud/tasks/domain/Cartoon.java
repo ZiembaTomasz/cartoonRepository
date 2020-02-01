@@ -1,7 +1,8 @@
 package com.crud.tasks.domain;
 
+import jdk.nashorn.internal.objects.annotations.Constructor;
+import jdk.nashorn.internal.objects.annotations.Getter;
 import lombok.*;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
