@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CartoonTest {
+public class CartoonTests {
 
     CartoonService cartoonService;
     @Mock
@@ -28,14 +28,14 @@ public class CartoonTest {
     CartoonMapper cartoonMapper;
 
     @Before
-    public void createCartoonServiceObject(){
+    public void createCartoonServiceObject() {
         cartoonMapper = new CartoonMapper(seasonMapper, cartoonRepository);
         cartoonService = new CartoonService(cartoonRepository, cartoonMapper);
     }
 
 
     @Test
-    public void shouldReturnAverageTest(){
+    public void shouldReturnAverageTest() {
         Cartoon cartoon = new Cartoon();
         List<UserRating> userRatings = new ArrayList<>();
         userRatings.add(new UserRating(2L, 10, null, 2L));
@@ -48,29 +48,62 @@ public class CartoonTest {
     }
 
     @Test
-    public void shouldGetAllTasks(){
+    public void shouldGetAllCartoons() {
         //Given
-        List<Season>seasonList = new ArrayList<>();
+        List<Season> seasonList = new ArrayList<>();
         List<UserRating> userRatingList = new ArrayList<>();
         Date date = new GregorianCalendar(1988, 06, 15).getGregorianChange();
         Cartoon cartoon = new Cartoon(1L, "Tom & Jerry", 10, date, seasonList, userRatingList);
         Cartoon cartoon1 = new Cartoon(2L, "Ed, Edd & Eddy", 9, date, seasonList, userRatingList);
-        List<Cartoon>cartoonList = new ArrayList<>();
+        List<Cartoon> cartoonList = new ArrayList<>();
         cartoonList.add(cartoon);
         cartoonList.add(cartoon1);
         when(cartoonRepository.findAll()).thenReturn(cartoonList);
         //When
-        List<CartoonDto>myCartoons = cartoonService.getAllCartoons();
+        List<CartoonDto> myCartoons = cartoonService.getAllCartoons();
         //Then
-        assertEquals(2,myCartoons.size());
+        assertEquals(2, myCartoons.size());
     }
+
     @Test
-    public void shouldUpdateCartoon(){
+    public void shouldGetCartoon(){
+        List<Season> seasonList = new ArrayList<>();
         //Given
-        List<SeasonDto>seasonList = new ArrayList<>();
         List<UserRating> userRatingList = new ArrayList<>();
         Date date = new GregorianCalendar(1988, 06, 15).getGregorianChange();
-        CartoonDto cartoonDto = new CartoonDto(1L, "Tom & Jerry", 10, 10, date, seasonList );
+        Cartoon cartoon = new Cartoon(1L, "Tom & Jerry", 10, date, seasonList, userRatingList);
+        when(cartoonRepository.getOne(1L)).thenReturn(cartoon);
+        //When
+        Cartoon myCartoon = cartoonMapper.mapToCarton(cartoonService.getCartoon(1L));
+        //Then
+        assertEquals(10, myCartoon.getAgeRestriction());
+    }
+
+    @Test
+    public void shouldGetCartoonByName(){
+        //Given
+        List<Season> seasonList = new ArrayList<>();
+        List<UserRating> userRatingList = new ArrayList<>();
+        Date date = new GregorianCalendar(1988, 06, 15).getGregorianChange();
+        Cartoon cartoon = new Cartoon(1L, "Tom & Jerry", 10, date, seasonList, userRatingList);
+        Cartoon cartoon1 = new Cartoon(2L, "Tomas and Friends", 9, date, seasonList, userRatingList);
+        List<Cartoon> cartoonList = new ArrayList<>();
+        cartoonList.add(cartoon);
+        cartoonList.add(cartoon1);
+        when(cartoonRepository.findByNameLike("Tom%")).thenReturn(cartoonList);
+        //When
+        List<CartoonDto>cartoonDtoList = cartoonService.findCartoonByName("Tom");
+        //Then
+        assertEquals(2, cartoonDtoList.size());
+    }
+
+    @Test
+    public void shouldUpdateCartoon() {
+        //Given
+        List<SeasonDto> seasonList = new ArrayList<>();
+        List<UserRating> userRatingList = new ArrayList<>();
+        Date date = new GregorianCalendar(1988, 06, 15).getGregorianChange();
+        CartoonDto cartoonDto = new CartoonDto(1L, "Tom & Jerry", 10, 10, date, seasonList);
         Cartoon cartoon = cartoonMapper.mapToCarton(cartoonDto);
         when(cartoonRepository.findOne(1L)).thenReturn(cartoon);
         //When
@@ -78,13 +111,30 @@ public class CartoonTest {
         //Then
         assertEquals("Tom & Jerry", myCartoonDto.getName());
     }
+
     @Test
-    public void shouldSaveCartoon(){
-        List<Season>seasonList = new ArrayList<>();
+    public void shouldSaveCartoon() {
+        //Given
+        List<Season> seasonList = new ArrayList<>();
         List<UserRating> userRatingList = new ArrayList<>();
         Date date = new GregorianCalendar(1988, 06, 15).getGregorianChange();
         Cartoon cartoon = new Cartoon(1L, "Tom & Jerry", 10, date, seasonList, userRatingList);
+        //When
         cartoonService.saveCartoon(cartoonMapper.mapToCartoonDto(cartoon));
+        //Then
         verify(cartoonRepository, times(1)).save(cartoon);
+    }
+
+    @Test
+    public void shouldDeleteCartoon() {
+        //Given
+        List<Season> seasonList = new ArrayList<>();
+        List<UserRating> userRatingList = new ArrayList<>();
+        Date date = new GregorianCalendar(1988, 06, 15).getGregorianChange();
+        Cartoon cartoon = new Cartoon(1L, "Tom & Jerry", 10, date, seasonList, userRatingList);
+        //When
+        cartoonService.deleteId(cartoonMapper.mapToCartoonDto(cartoon).getId());
+        //Then
+        verify(cartoonRepository, times(1)).delete(1L);
     }
 }
