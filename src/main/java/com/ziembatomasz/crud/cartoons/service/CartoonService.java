@@ -5,6 +5,7 @@ import com.ziembatomasz.crud.cartoons.domain.CartoonDto;
 import com.ziembatomasz.crud.cartoons.mapper.CartoonMapper;
 import com.ziembatomasz.crud.cartoons.repository.CartoonRepository;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.hibernate.validator.internal.util.Contracts;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
+@Data
 public class CartoonService {
 
     private CartoonRepository cartoonRepository;

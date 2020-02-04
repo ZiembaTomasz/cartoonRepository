@@ -7,11 +7,13 @@ import com.ziembatomasz.crud.cartoons.domain.UserRating;
 import com.ziembatomasz.crud.cartoons.repository.CartoonRepository;
 import com.ziembatomasz.crud.cartoons.domain.Season;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@NoArgsConstructor
 @AllArgsConstructor
 @Component
 public class CartoonMapper {
@@ -26,7 +28,6 @@ public class CartoonMapper {
                 cartoon.ratingAverage(),
                 cartoon.getDate(),
                 seasonMapper.mapToSeasonDto(cartoon.getSeasons()));
-
     }
 
     public List<CartoonDto> mapToCartoonDtoList(final List<Cartoon> cartoonList) {

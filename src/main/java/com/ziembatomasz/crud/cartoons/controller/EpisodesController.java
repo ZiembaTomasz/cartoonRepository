@@ -35,5 +35,4 @@ public class EpisodesController {
     public void deleteEpisode(@PathVariable Long episodId, @PathVariable Long seasonId){
         episodService.deleteEpisode(episodId);
     }
-
 }

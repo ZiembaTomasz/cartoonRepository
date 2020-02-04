@@ -17,37 +17,38 @@ public class CartoonController {
     private CartoonService cartoonService;
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "getCartoons")
-    public List<CartoonDto> getCartoons(){
-
+    @GetMapping(value = "getCartoons")
+    public List<CartoonDto> getCartoons() {
         return cartoonService.getAllCartoons();
     }
-    @RequestMapping(method = RequestMethod.GET, value = "getCartoon")
-    public CartoonDto  getCartoon(@RequestParam Long cartoonId) {
-       return cartoonService.getCartoon(cartoonId);
+
+    @GetMapping(value = "getCartoon")
+    public CartoonDto getCartoon(@RequestParam Long cartoonId) {
+        return cartoonService.getCartoon(cartoonId);
     }
-    @RequestMapping(method = RequestMethod.GET, value = "getCartoonByName")
-    public List<CartoonDto> getCartoonByName(@RequestParam String name){
+
+    @GetMapping(value = "getCartoonByName")
+    public List<CartoonDto> getCartoonByName(@RequestParam String name) {
         return cartoonService.findCartoonByName(name);
     }
-    @RequestMapping(method = RequestMethod.DELETE, value = "deleteCartoon")
-    public void deleteCartoon(@RequestBody Long cartoonId){
+
+    @DeleteMapping(value = "deleteCartoon")
+    public void deleteCartoon(@RequestBody Long cartoonId) {
         cartoonService.deleteId(cartoonId);
-
-
     }
-    @RequestMapping(method = RequestMethod.POST, value = "createCartoon")
-    public void createCartoon(@RequestBody CartoonDto cartoonDto){
+
+    @PostMapping(value = "createCartoon")
+    public void createCartoon(@RequestBody CartoonDto cartoonDto) {
         cartoonService.saveCartoon(cartoonDto);
-
     }
-    @RequestMapping(method = RequestMethod.PUT, value = "updateCarton")
-    public CartoonDto updateCartoon(@RequestBody CartoonDto cartoonDto){
+
+    @PutMapping(value = "updateCarton")
+    public CartoonDto updateCartoon(@RequestBody CartoonDto cartoonDto) {
         return cartoonService.updateCartoon(cartoonDto);
     }
-    @RequestMapping(method = RequestMethod.GET, value = "getCartoonsFromDate")
-    public List<CartoonDto> retrieveNewCartoons(Date date){
-        return cartoonService.retrieveNewCartoons(date);
 
+    @GetMapping(value = "getCartoonsFromDate")
+    public List<CartoonDto> retrieveNewCartoons(Date date) {
+        return cartoonService.retrieveNewCartoons(date);
     }
 }
