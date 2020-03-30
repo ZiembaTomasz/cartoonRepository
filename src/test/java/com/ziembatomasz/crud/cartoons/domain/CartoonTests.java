@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.*;
 
@@ -133,7 +134,7 @@ public class CartoonTests {
         Date date = new GregorianCalendar(1988, 06, 15).getGregorianChange();
         Cartoon cartoon = new Cartoon(1L, "Tom & Jerry", 10, date, seasonList, userRatingList);
         //When
-        cartoonService.deleteId(cartoonMapper.mapToCartoonDto(cartoon).getId());
+        cartoonService.deleteId(cartoon.getId());
         //Then
         verify(cartoonRepository, times(1)).delete(1L);
     }

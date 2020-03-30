@@ -17,37 +17,37 @@ public class CartoonController {
     private CartoonService cartoonService;
 
 
-    @GetMapping(value = "getCartoons")
+    @GetMapping(value = "/getCartoons")
     public List<CartoonDto> getCartoons() {
         return cartoonService.getAllCartoons();
     }
 
-    @GetMapping(value = "getCartoon")
+    @GetMapping(value = "/getCartoon")
     public CartoonDto getCartoon(@RequestParam Long cartoonId) {
         return cartoonService.getCartoon(cartoonId);
     }
 
-    @GetMapping(value = "getCartoonByName")
+    @GetMapping(value = "/getCartoonByName")
     public List<CartoonDto> getCartoonByName(@RequestParam String name) {
         return cartoonService.findCartoonByName(name);
     }
 
-    @DeleteMapping(value = "deleteCartoon")
+    @DeleteMapping(value = "/deleteCartoon")
     public void deleteCartoon(@RequestBody Long cartoonId) {
         cartoonService.deleteId(cartoonId);
     }
 
-    @PostMapping(value = "createCartoon")
+    @PostMapping(value = "/createCartoon")
     public void createCartoon(@RequestBody CartoonDto cartoonDto) {
         cartoonService.saveCartoon(cartoonDto);
     }
 
-    @PutMapping(value = "updateCarton")
+    @PutMapping(value = "/updateCarton")
     public CartoonDto updateCartoon(@RequestBody CartoonDto cartoonDto) {
         return cartoonService.updateCartoon(cartoonDto);
     }
 
-    @GetMapping(value = "getCartoonsFromDate")
+    @GetMapping(value = "/getCartoonsFromDate")
     public List<CartoonDto> retrieveNewCartoons(Date date) {
         return cartoonService.retrieveNewCartoons(date);
     }

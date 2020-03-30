@@ -20,6 +20,7 @@ public class CartoonMapper {
     SeasonMapper seasonMapper;
     CartoonRepository cartoonRepository;
 
+
     public CartoonDto mapToCartoonDto(final Cartoon cartoon) {
         return new CartoonDto(
                 cartoon.getId(),
