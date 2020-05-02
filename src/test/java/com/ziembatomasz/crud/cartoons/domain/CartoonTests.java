@@ -37,6 +37,7 @@ public class CartoonTests {
 
     @Test
     public void shouldReturnAverageTest() {
+        //Given
         Cartoon cartoon = new Cartoon();
         List<UserRating> userRatings = new ArrayList<>();
         userRatings.add(new UserRating(2L, 10, null, 2L));
@@ -68,8 +69,8 @@ public class CartoonTests {
 
     @Test
     public void shouldGetCartoon(){
-        List<Season> seasonList = new ArrayList<>();
         //Given
+        List<Season> seasonList = new ArrayList<>();
         List<UserRating> userRatingList = new ArrayList<>();
         Date date = new GregorianCalendar(1988, 06, 15).getGregorianChange();
         Cartoon cartoon = new Cartoon(1L, "Tom & Jerry", 10, date, seasonList, userRatingList);
@@ -137,5 +138,20 @@ public class CartoonTests {
         cartoonService.deleteId(cartoon.getId());
         //Then
         verify(cartoonRepository, times(1)).delete(1L);
+    }
+    @Test
+    public void shouldRetrieveNewCartoons(){
+        //Given
+        List<Season> seasonList = new ArrayList<>();
+        List<UserRating> userRatingList = new ArrayList<>();
+        List<Cartoon>cartoons = new ArrayList<>();
+        Date date = new GregorianCalendar(1988, 06, 15).getGregorianChange();
+        Cartoon cartoon = new Cartoon(1L, "Tom & Jerry", 10, date, seasonList, userRatingList);
+        cartoons.add(cartoon);
+        when(cartoonRepository.retrieveNewCartoons(date)).thenReturn(cartoons);
+        //When
+        List<CartoonDto>cartoonDtos = cartoonService.retrieveNewCartoons(date);
+        //Then
+        assertEquals(1, cartoonDtos.size());
     }
 }

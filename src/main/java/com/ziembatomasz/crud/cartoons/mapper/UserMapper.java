@@ -3,12 +3,16 @@ package com.ziembatomasz.crud.cartoons.mapper;
 
 import com.ziembatomasz.crud.cartoons.domain.User;
 import com.ziembatomasz.crud.cartoons.domain.UserDto;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserMapper {
     SeasonMapper seasonMapper;
     UserRatingMapper userRatingMapper;
@@ -18,8 +22,6 @@ public class UserMapper {
                 user.getFirstname(),
                 user.getLastname(),
                 user.getEmail());
-
-
     }
 
     public List<User> mapToUsers (final List<UserDto>userRatings){

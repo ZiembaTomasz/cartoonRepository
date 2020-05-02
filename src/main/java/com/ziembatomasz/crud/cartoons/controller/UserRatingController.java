@@ -12,15 +12,15 @@ import java.util.List;
 @RequestMapping("/cartoon/{cartoonId)/")
 public class UserRatingController {
     UserRatingService userRatingService;
-    @RequestMapping(method = RequestMethod.GET, value = "rating")
+    @RequestMapping(method = RequestMethod.GET, value = "getRating")
     public List<UserRatingDto>getRating(@RequestParam Long cartoonId){
         return userRatingService.findByCartoonId(cartoonId);
     }
-    @RequestMapping(method = RequestMethod.POST, value = "rating")
+    @RequestMapping(method = RequestMethod.POST, value = "addRating")
     public void addRating(@RequestBody UserRatingDto userRatingDto){
         userRatingService.addRating(userRatingDto);
     }
-    @RequestMapping(method = RequestMethod.PUT, value = "rating")
+    @RequestMapping(method = RequestMethod.PUT, value = "updateRating")
     public UserRatingDto updateUserRating(@RequestBody UserRatingDto userRatingDto){
         return userRatingService.addRating(userRatingDto);
     }
