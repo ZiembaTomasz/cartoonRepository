@@ -15,7 +15,7 @@ import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceTest {
@@ -35,7 +35,7 @@ public class UserServiceTest {
         userService = new UserService(userRepository, userMapper);
     }
     @Test
-    public void gestAllUsersTest(){
+    public void shouldGetAllUsers(){
         //Given
         List<User>users = new ArrayList<>();
         users.add(user);
@@ -46,12 +46,39 @@ public class UserServiceTest {
         assertEquals(1, userDtos.size());
     }
     @Test
-    public void getUserById(){
+    public void shouldGetUserById(){
         //Given
         when(userRepository.getOne(1L)).thenReturn(user);
         //When
         UserDto userDto = userService.getUser(1L);
         //Then
         assertThat(userDto.getId(), is(1L));
+    }
+    @Test
+    public void shouldGetUserByLastName(){
+        //Given
+        when(userRepository.findByLastnameLike("Pavlovski")).thenReturn(user);
+        //When
+        UserDto userDto = userService.getUserByName("Pavlovski");
+        //Then
+        assertEquals("Pavlovski", userDto.getLastname());
+    }
+    @Test
+    public void shouldAddUser(){
+        //Given
+        UserDto userDto = userMapper.mapToUserDto(user);
+        //When
+        userService.saveUser(userDto);
+        //Then
+        verify(userRepository,times(1)).save(user);
+    }
+    @Test
+    public void shouldDeleteUser(){
+        //Given
+        Long userId = user.getId();
+        //When
+        userService.deleteUser(userId);
+        //Then
+        verify(userRepository, times(1)).delete(userId);
     }
 }
