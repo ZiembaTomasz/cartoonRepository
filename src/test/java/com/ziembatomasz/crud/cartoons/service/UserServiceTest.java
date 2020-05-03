@@ -64,6 +64,17 @@ public class UserServiceTest {
         assertEquals("Pavlovski", userDto.getLastname());
     }
     @Test
+    public void shouldUpdateUser(){
+        //Given
+        UserDto userDto = new UserDto(13L, "John", "Pedro", "pedro@gmail.com");
+
+        //When
+        UserDto result = userService.updateUser(userDto);
+        //Then
+        assertThat(result.getId(), is(13L));
+
+    }
+    @Test
     public void shouldAddUser(){
         //Given
         UserDto userDto = userMapper.mapToUserDto(user);

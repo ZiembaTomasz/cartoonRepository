@@ -26,7 +26,7 @@ public class CartoonService {
 
     public CartoonDto updateCartoon(final CartoonDto cartoonDto) {
         Contracts.assertNotNull(cartoonDto.getId(), "Cannot update without ID");
-        Contracts.assertNotNull(cartoonRepository.findOne(cartoonDto.getId()), "Cartoon doesnt exist in database");
+        Contracts.assertNotNull(cartoonRepository.findOne(cartoonDto.getId()));
         Cartoon cartoon = cartoonMapper.mapToCarton(cartoonDto);
         cartoonRepository.save(cartoon);
         return cartoonMapper.mapToCartoonDto(cartoon);

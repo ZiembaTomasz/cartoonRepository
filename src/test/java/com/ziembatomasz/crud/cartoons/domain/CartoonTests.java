@@ -103,7 +103,6 @@ public class CartoonTests {
     public void shouldUpdateCartoon() {
         //Given
         List<SeasonDto> seasonList = new ArrayList<>();
-        List<UserRating> userRatingList = new ArrayList<>();
         Date date = new GregorianCalendar(1988, 06, 15).getGregorianChange();
         CartoonDto cartoonDto = new CartoonDto(1L, "Tom & Jerry", 10, 10, date, seasonList);
         Cartoon cartoon = cartoonMapper.mapToCarton(cartoonDto);
