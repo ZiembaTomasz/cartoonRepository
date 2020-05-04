@@ -23,6 +23,5 @@ public class UserRatingService {
         UserRating userRating = userRatingMapper.mapToUserRating(userRatingDto);
         userRatingRepository.save(userRating);
         return userRatingMapper.mapToUserRatingDto(userRating);
-
     }
 }
