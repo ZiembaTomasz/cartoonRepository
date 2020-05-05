@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 
 @Component
 @AllArgsConstructor
-@NoArgsConstructor
 public class UserMapper {
     SeasonMapper seasonMapper;
     UserRatingMapper userRatingMapper;

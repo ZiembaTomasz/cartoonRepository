@@ -19,9 +19,8 @@ public class UserRatingService {
          List<UserRating> userRatings = userRatingRepository.findUserRatingByCartoonId(cartoonId);
          return userRatingMapper.mapToUserRatingDto(userRatings);
     }
-    public UserRatingDto addRating(UserRatingDto userRatingDto){
+    public void addRating(UserRatingDto userRatingDto){
         UserRating userRating = userRatingMapper.mapToUserRating(userRatingDto);
         userRatingRepository.save(userRating);
-        return userRatingMapper.mapToUserRatingDto(userRating);
     }
 }

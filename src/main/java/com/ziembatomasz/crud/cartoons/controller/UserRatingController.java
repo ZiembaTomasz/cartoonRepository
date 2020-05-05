@@ -21,7 +21,7 @@ public class UserRatingController {
         userRatingService.addRating(userRatingDto);
     }
     @RequestMapping(method = RequestMethod.PUT, value = "updateRating")
-    public UserRatingDto updateUserRating(@RequestBody UserRatingDto userRatingDto){
-        return userRatingService.addRating(userRatingDto);
+    public void updateUserRating(@RequestBody UserRatingDto userRatingDto){
+        userRatingService.addRating(userRatingDto);
     }
 }

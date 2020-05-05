@@ -7,6 +7,7 @@ import com.ziembatomasz.crud.cartoons.repository.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -22,8 +23,8 @@ public class UserServiceTest {
     private User user;
 
     private UserService userService;
-
-    private UserMapper userMapper = new UserMapper();
+    @InjectMocks
+    private UserMapper userMapper;
     @Mock
     private UserRepository userRepository;
     @Before

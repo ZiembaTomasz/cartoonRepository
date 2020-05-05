@@ -5,15 +5,17 @@ import com.ziembatomasz.crud.cartoons.domain.UserRatingDto;
 import com.ziembatomasz.crud.cartoons.repository.CartoonRepository;
 
 import com.ziembatomasz.crud.cartoons.repository.UserRepository;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
+@AllArgsConstructor
 public class UserRatingMapper {
 
-    CartoonRepository cartoonRepository;
     UserRepository userRepository;
 
 
@@ -39,5 +41,4 @@ public class UserRatingMapper {
                 .map(this::mapToUserRating)
                 .collect(Collectors.toList());
     }
-    ////
 }
